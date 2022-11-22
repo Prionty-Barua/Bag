@@ -98,12 +98,17 @@ class BagController extends Controller
         if($image = $request->file('iamge')){
             $destinationPath = 'image/';
             $profileImage =date('YmdHis') . "." . $image->getClientOriginalExtension();
-            $image->move($destination, $profileImage);
+            $image->move($destinationPath, $profileImage);
             $input['image'] ="$profileImage";
         }else{
             unset($input['image']);
         }
-        
+        // $cars = Car::where('id',$id)->update([
+        //     'name' => $request->input('name'),
+        //     'founded' => $request->input('founded'),
+        //     'description' => $request->input('description'),
+        // ]);
+        // return redirect('/cars');
         $bag->update($input);
 
         return redirect()->route('bags.index')
